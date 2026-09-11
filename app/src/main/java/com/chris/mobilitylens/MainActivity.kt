@@ -2,10 +2,12 @@
 
 package com.chris.mobilitylens
 
+import android.R
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -23,7 +25,19 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.material3.Button
+import androidx.compose.material3.OutlinedTextField
+
+
+//for formatting
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.unit.dp
 
 //A class for the six dimensions
 data class Dimensions(
@@ -65,6 +79,8 @@ val dim = listOf(
         implication = ""
     ),
 )
+
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,10 +107,26 @@ fun DisplayMobilityLens(innerPadding: PaddingValues) {
     //in this case, we have the "currIndex" val that changes to switch to the next dimension
     var currIndex by remember {mutableStateOf(0)}
     var currDimension = dim[currIndex]
+    //for the text field
+    var userText by remember {mutableStateOf("")}
+    //for the disppayed text
+    var displayText by remember {mutableStateOf("")}
     //Column arranges the UI elements vertically
-    Column {
+    Column(
+        modifier = Modifier
+            //fill the maxiumum of the screen
+            .fillMaxSize()
+            //padding included so it does not get placed near the edges of the screen
+            .padding(innerPadding)
+            .padding(24.dp),
+        verticalArrangement = Arrangement.Top
+    ){
         Text("Mobility Lens")
-        Text("Let's explore the six dimensions that distinguish mobile applications from stationary applications!")
+        Text(
+            text = "Let's explore the six dimensions that distinguish mobile applications from stationary applications!",
+            //bodyLarge is a style for title headings
+            style = MaterialTheme.typography.bodyLarge
+        )
 
         Text("Dimension: ${currDimension.name}")
         Text("Description: ${currDimension.description}")
@@ -131,21 +163,59 @@ fun DisplayMobilityLens(innerPadding: PaddingValues) {
                 Text("Next")
             }
         }
+
+        //for the textbox for the user to enter info
+        OutlinedTextField(
+            //intial value
+            value = userText,
+            //userText gets updated whenever the user types something
+            onValueChange = {userText = it},
+            //The prompt for the user on what to enter in the text
+            label = {Text("Enter your app name")},
+            modifier = Modifier.fillMaxWidth().padding(16.dp)
+            )
+
+        //for space between the ui elements
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Button(
+            onClick = {
+                if(!userText.isBlank())
+                {
+                    displayText = userText + " : " + currDimension.name
+                }
+                else{
+                    displayText = "Don't leave the field blank!"
+                }
+            })
+            {
+                Text("Submit")
+            }
+
+        //To display the user text with the current dimension info
+        OutlinedTextField(
+            value = displayText,
+            //we want it to be read only
+            onValueChange = {},
+            label = {},
+            modifier = Modifier.fillMaxWidth().padding(16.dp)
+        )
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    MobilityLensTheme {
-        Greeting("Android")
-    }
-}
+//
+//@Composable
+//fun Greeting(name: String, modifier: Modifier = Modifier) {
+//    Text(
+//        text = "Hello $name!",
+//        modifier = modifier
+//    )
+//}
+//
+//@Preview(showBackground = true)
+//@Composable
+//fun GreetingPreview() {
+//    MobilityLensTheme {
+//        Greeting("Android")
+//    }
+//}

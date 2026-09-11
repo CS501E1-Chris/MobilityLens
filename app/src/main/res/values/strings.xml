@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">MobilityLens</string>
+    <string name="dimension1">MobilityLens</string>
+    <string name="dimension2">MobilityLens</string>
+    <string name="dimension3">MobilityLens</string>
+    <string name="dimension4">MobilityLens</string>
+    <string name="dimension5">MobilityLens</string>
+    <string name="dimension6">MobilityLens</string>
 </resources>
