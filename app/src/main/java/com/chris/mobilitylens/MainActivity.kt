@@ -43,7 +43,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 //A class for the six dimensions
@@ -133,7 +135,7 @@ fun DisplayMobilityLens(innerPadding: PaddingValues) {
             .padding(24.dp),
         verticalArrangement = Arrangement.Top
     ){
-        Text(text = "Mobility Lens",
+        Text(text = stringResource(R.string.app_name),
             style = MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Center,
             modifier = Modifier.fillMaxWidth())
@@ -141,7 +143,7 @@ fun DisplayMobilityLens(innerPadding: PaddingValues) {
         Spacer(modifier = Modifier.height(15.dp))
 
         Text(
-            text = "Let's explore the six dimensions that distinguish mobile applications from stationary applications!",
+            text = stringResource(R.string.intro),
             style = MaterialTheme.typography.bodySmall,
             textAlign = TextAlign.Center,
             modifier = Modifier.fillMaxWidth()
@@ -149,9 +151,9 @@ fun DisplayMobilityLens(innerPadding: PaddingValues) {
 
         Spacer(modifier = Modifier.height(30.dp))
 
-        DisplayDimensions("Dimensions", stringResource(currDimension.name))
-        DisplayDimensions("Description", stringResource(currDimension.description))
-        DisplayDimensions("Implications", stringResource(currDimension.implication))
+        DisplayDimensions(stringResource(R.string.dimension), stringResource(currDimension.name))
+        DisplayDimensions(stringResource(R.string.description), stringResource(currDimension.description))
+        DisplayDimensions(stringResource(R.string.implication), stringResource(currDimension.implication))
 
         Spacer(modifier = Modifier.height(25.dp))
 
@@ -209,7 +211,7 @@ fun DisplayMobilityLens(innerPadding: PaddingValues) {
                 //The prompt for the user on what to enter in the text
                 label = {
                     Text(
-                        text = "Enter your app name",
+                        text = stringResource(R.string.user_field),
                         style = MaterialTheme.typography.bodyMedium
                     )
                 },
@@ -220,13 +222,14 @@ fun DisplayMobilityLens(innerPadding: PaddingValues) {
             Spacer(modifier = Modifier.width(16.dp))
 
             val tempDim = stringResource(currDimension.name)
+            val tempFeedback = stringResource(R.string.feedback)
 
             Button(
                 onClick = {
                     if (!userText.isBlank()) {
                         displayText = "$userText : $tempDim"
                     } else {
-                        displayText = "Don't leave the field blank!"
+                        displayText = tempFeedback
                     }
                 })
             {
@@ -252,6 +255,7 @@ fun DisplayDimensions(textDim: String, contentDim: String)
         text = textDim,
         style = MaterialTheme.typography.bodySmall,
         textAlign = TextAlign.Center,
+        fontWeight = FontWeight.Bold,
         modifier = Modifier.fillMaxWidth()
     )
 
@@ -270,3 +274,15 @@ fun DisplayDimensions(textDim: String, contentDim: String)
 
     Spacer(modifier = Modifier.height(15.dp))
 }
+
+//for viewing a preview of the screen
+@Preview(showBackground = true)
+@Composable
+fun DisplayMobilityLensPreview()
+{
+    MobilityLensTheme{
+        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding -> DisplayMobilityLens(innerPadding) }
+        DisplayMobilityLens(innerPadding = PaddingValues(0.dp))
+    }
+}
+

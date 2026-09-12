@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Mobility Lens</string>
+    <string name="intro">Let\'s explore the six dimensions that distinguish mobile applications from stationary applications!</string>
+    <string name="user_field">Enter your app/feature name</string>
+    <string name="feedback">Don\'t leave the field blank!"</string>
 
     <string name="dimension1">Input and Interaction</string>
     <string name="dimension1_desc">Mobile users interact through touch, gestures, voice, and other input methods.</string>
@@ -10,19 +13,23 @@
     <string name="dimension2_imp">Use responsive layouts and scalable dimensions so content remains usable.</string>
 
     <string name="dimension3">Lifecycle and Resource Constraints</string>
-    <string name="dimension3_desc">Input and Interaction</string>
-    <string name="dimension3_imp">Input and Interaction</string>
+    <string name="dimension3_desc">Mobile apps get interrupted or killed by the OS, and run on devices with limited battery, memory, and bandwidth.</string>
+    <string name="dimension3_imp">Design for graceful state resumption and lean resource use.</string>
 
     <string name="dimension4">Security and Privacy Expectations</string>
-    <string name="dimension4_desc">Input and Interaction</string>
-    <string name="dimension4_imp">Input and Interaction</string>
+    <string name="dimension4_desc">Mobile apps often access sensitive data like location, contacts, and camera. Request only what\'s needed and handle it transparently.</string>
+    <string name="dimension4_imp">Ask for permissions only when the feature is used, and explain why each one is needed.</string>
 
     <string name="dimension5">Context Awareness</string>
-    <string name="dimension5_desc">Input and Interaction</string>
-    <string name="dimension5_imp">Input and Interaction</string>
+    <string name="dimension5_desc">Mobile apps can sense location, motion, and surroundings in ways stationary apps can\'t. This context should inform, not dictate, app behavior.</string>
+    <string name="dimension5_imp">Handle missing or inaccurate sensor data gracefully instead of assuming it\'s always available.</string>
 
     <string name="dimension6">Usage Patterns</string>
-    <string name="dimension6_desc">Input and Interaction</string>
-    <string name="dimension6_imp">Input and Interaction</string>
+    <string name="dimension6_desc">Mobile users engage in short, frequent bursts rather than long sessions.</string>
+    <string name="dimension6_imp">Design for quick task completion, minimal steps, and easy resumption after interruption.</string>
+
+    <string name="dimension">Dimension</string>
+    <string name="description">Description</string>
+    <string name="implication">Implication</string>
 
 </resources>
