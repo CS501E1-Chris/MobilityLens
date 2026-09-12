@@ -2,7 +2,6 @@
 
 package com.chris.mobilitylens
 
-import android.R
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -16,7 +15,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.res.stringResource
 import com.chris.mobilitylens.ui.theme.MobilityLensTheme
 
 //added
@@ -29,7 +28,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 
-
 //for formatting
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -37,46 +35,51 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
 //A class for the six dimensions
 data class Dimensions(
-    val name: String,
-    val description: String,
-    val implication: String
+    //assigning Int not string, because can't put stringResource() out of composable
+    val name: Int,
+    val description: Int,
+    val implication: Int
 )
 
 //then we can create a list of the six dimensions to feed into the objects of the above class
 val dim = listOf(
     Dimensions(
-        name = "Input and Interaction",
-        description = "Mobile users interact through touch, gestures, voice, and other input methods.",
-        implication = "Design controls that are easy to tap and provide clear feedback."
+        name = R.string.dimension1,
+        description = R.string.dimension1_desc,
+        implication = R.string.dimension1_imp
     ),
     Dimensions(
-        name = "Screen Size, Orientation, and Density",
-        description = "Mobile devices have different screen sizes, orientations, and pixel densities.",
-        implication = "Use responsive layouts and scalable dimensions so content remains usable."
+        name = R.string.dimension2,
+        description = R.string.dimension2_desc,
+        implication = R.string.dimension2_imp
     ),
     Dimensions(
-        name = "Lifecycle and Resource Constraints",
-        description = "",
-        implication = ""
+        name = R.string.dimension3,
+        description = R.string.dimension3_desc,
+        implication = R.string.dimension3_imp
     ),
     Dimensions(
-        name = "Security and Privacy Expectations",
-        description = "",
-        implication = ""
+        name = R.string.dimension4,
+        description = R.string.dimension4_desc,
+        implication = R.string.dimension4_imp
     ),
     Dimensions(
-        name = "Context Awareness",
-        description = "",
-        implication = ""
+        name = R.string.dimension5,
+        description = R.string.dimension5_desc,
+        implication = R.string.dimension5_imp
     ),
     Dimensions(
-        name = "Usage Patterns",
-        description = "",
-        implication = ""
+        name = R.string.dimension6,
+        description = R.string.dimension6_desc,
+        implication = R.string.dimension6_imp
     ),
 )
 
@@ -109,8 +112,11 @@ fun DisplayMobilityLens(innerPadding: PaddingValues) {
     var currDimension = dim[currIndex]
     //for the text field
     var userText by remember {mutableStateOf("")}
-    //for the disppayed text
+    //for the displayed text
     var displayText by remember {mutableStateOf("")}
+    //for using stringResource() inside events such as onClick
+
+    val context = LocalContext.current
     //Column arranges the UI elements vertically
     Column(
         modifier = Modifier
@@ -121,23 +127,42 @@ fun DisplayMobilityLens(innerPadding: PaddingValues) {
             .padding(24.dp),
         verticalArrangement = Arrangement.Top
     ){
-        Text("Mobility Lens")
+        Text(text = "Mobility Lens",
+            style = MaterialTheme.typography.bodyLarge,
+            textAlign = TextAlign.Center)
+
+        Spacer(modifier = Modifier.height(50.dp))
+
         Text(
             text = "Let's explore the six dimensions that distinguish mobile applications from stationary applications!",
-            //bodyLarge is a style for title headings
-            style = MaterialTheme.typography.bodyLarge
+            style = MaterialTheme.typography.bodyMedium
         )
 
-        Text("Dimension: ${currDimension.name}")
-        Text("Description: ${currDimension.description}")
-        Text("Description: ${currDimension.implication}")
+        Spacer(modifier = Modifier.height(30.dp))
+
+        Text(text = "Dimension: ${stringResource(currDimension.name)}",
+            style = MaterialTheme.typography.bodyMedium,
+            textAlign = TextAlign.Center)
+        Text(text = "Description: ${stringResource(currDimension.description)}",
+            style = MaterialTheme.typography.bodyMedium,
+            textAlign = TextAlign.Center)
+        Text(text = "Implication: ${stringResource(currDimension.implication)}",
+            style = MaterialTheme.typography.bodyMedium,
+            textAlign = TextAlign.Center)
+
+        Spacer(modifier = Modifier.height(16.dp))
 
         //now to include the previous and next buttons
-
-        Row {
+        Row (
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally)
+        ){
             //Previous
             Button(
                 onClick = {
+                    //clearing the text field
+                    displayText = ""
+
                     if (currIndex == 0) {
                         currIndex = dim.size - 1
                     } else {
@@ -152,6 +177,8 @@ fun DisplayMobilityLens(innerPadding: PaddingValues) {
             //Next
             Button(
                 onClick = {
+                    displayText = ""
+
                     if (currIndex == dim.size - 1) {
                         currIndex = 0
                     } else {
@@ -165,32 +192,43 @@ fun DisplayMobilityLens(innerPadding: PaddingValues) {
         }
 
         //for the textbox for the user to enter info
-        OutlinedTextField(
-            //intial value
-            value = userText,
-            //userText gets updated whenever the user types something
-            onValueChange = {userText = it},
-            //The prompt for the user on what to enter in the text
-            label = {Text("Enter your app name")},
-            modifier = Modifier.fillMaxWidth().padding(16.dp)
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally)
+        ) {
+            OutlinedTextField(
+                //intial value
+                value = userText,
+                //userText gets updated whenever the user types something
+                onValueChange = { userText = it },
+                //The prompt for the user on what to enter in the text
+                label = {
+                    Text(
+                        text = "Enter your app name",
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                },
+                modifier = Modifier.fillMaxWidth().padding(16.dp)
             )
 
-        //for space between the ui elements
-        Spacer(modifier = Modifier.height(16.dp))
+            //for space between the ui elements
+            Spacer(modifier = Modifier.height(16.dp))
 
-        Button(
-            onClick = {
-                if(!userText.isBlank())
-                {
-                    displayText = userText + " : " + currDimension.name
-                }
-                else{
-                    displayText = "Don't leave the field blank!"
-                }
-            })
+            val tempDim = stringResource(currDimension.name)
+
+            Button(
+                onClick = {
+                    if (!userText.isBlank()) {
+                        displayText = "$userText : $tempDim"
+                    } else {
+                        displayText = "Don't leave the field blank!"
+                    }
+                })
             {
                 Text("Submit")
             }
+        }
 
         //To display the user text with the current dimension info
         OutlinedTextField(
@@ -202,20 +240,3 @@ fun DisplayMobilityLens(innerPadding: PaddingValues) {
         )
     }
 }
-
-//
-//@Composable
-//fun Greeting(name: String, modifier: Modifier = Modifier) {
-//    Text(
-//        text = "Hello $name!",
-//        modifier = modifier
-//    )
-//}
-//
-//@Preview(showBackground = true)
-//@Composable
-//fun GreetingPreview() {
-//    MobilityLensTheme {
-//        Greeting("Android")
-//    }
-//}

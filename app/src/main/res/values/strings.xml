@@ -1,9 +1,28 @@
 <resources>
-    <string name="app_name">MobilityLens</string>
-    <string name="dimension1">MobilityLens</string>
-    <string name="dimension2">MobilityLens</string>
-    <string name="dimension3">MobilityLens</string>
-    <string name="dimension4">MobilityLens</string>
-    <string name="dimension5">MobilityLens</string>
-    <string name="dimension6">MobilityLens</string>
+    <string name="app_name">Mobility Lens</string>
+
+    <string name="dimension1">Input and Interaction</string>
+    <string name="dimension1_desc">Mobile users interact through touch, gestures, voice, and other input methods.</string>
+    <string name="dimension1_imp">Design controls that are easy to tap and provide clear feedback.</string>
+
+    <string name="dimension2">Screen Size, Orientation, and Density</string>
+    <string name="dimension2_desc">Mobile devices have different screen sizes, orientations, and pixel densities.</string>
+    <string name="dimension2_imp">Use responsive layouts and scalable dimensions so content remains usable.</string>
+
+    <string name="dimension3">Lifecycle and Resource Constraints</string>
+    <string name="dimension3_desc">Input and Interaction</string>
+    <string name="dimension3_imp">Input and Interaction</string>
+
+    <string name="dimension4">Security and Privacy Expectations</string>
+    <string name="dimension4_desc">Input and Interaction</string>
+    <string name="dimension4_imp">Input and Interaction</string>
+
+    <string name="dimension5">Context Awareness</string>
+    <string name="dimension5_desc">Input and Interaction</string>
+    <string name="dimension5_imp">Input and Interaction</string>
+
+    <string name="dimension6">Usage Patterns</string>
+    <string name="dimension6_desc">Input and Interaction</string>
+    <string name="dimension6_imp">Input and Interaction</string>
+
 </resources>

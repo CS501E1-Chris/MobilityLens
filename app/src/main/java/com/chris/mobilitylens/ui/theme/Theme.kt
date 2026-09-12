@@ -37,14 +37,14 @@ import androidx.compose.ui.platform.LocalContext
 private val LightColorScheme = lightColorScheme(
 
     //primary correlates to the color seen on the primary UI elements
-    primary = Color(0xFF2E7D32),
+    primary = Color(0xffAA336A),
     //correlates to the color of the content on the UI primary elements
     onPrimary = Color(0xFFFFFFFF),
     secondary = Color(0xFF6D4C41),
     onSecondary = Color(0xFFFFFFFF),
     tertiary = Color(0xFF00695C),
     onTertiary = Color(0xFFFFFFFF),
-    background = Color(0xFFF5F5F0),
+    background = Color(0xFFFFB6C1),
     onBackground = Color(0xFF1B1B1B),
     surface = Color(0xFFFFFFFF),
     onSurface = Color(0xFF1B1B1B),
