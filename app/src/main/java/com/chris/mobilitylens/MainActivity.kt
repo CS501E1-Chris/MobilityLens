@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -34,8 +35,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -118,6 +123,7 @@ fun DisplayMobilityLens(innerPadding: PaddingValues) {
 
     val context = LocalContext.current
     //Column arranges the UI elements vertically
+
     Column(
         modifier = Modifier
             //fill the maxiumum of the screen
@@ -129,28 +135,25 @@ fun DisplayMobilityLens(innerPadding: PaddingValues) {
     ){
         Text(text = "Mobility Lens",
             style = MaterialTheme.typography.bodyLarge,
-            textAlign = TextAlign.Center)
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth())
 
-        Spacer(modifier = Modifier.height(50.dp))
+        Spacer(modifier = Modifier.height(15.dp))
 
         Text(
             text = "Let's explore the six dimensions that distinguish mobile applications from stationary applications!",
-            style = MaterialTheme.typography.bodyMedium
+            style = MaterialTheme.typography.bodySmall,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
         )
 
         Spacer(modifier = Modifier.height(30.dp))
 
-        Text(text = "Dimension: ${stringResource(currDimension.name)}",
-            style = MaterialTheme.typography.bodyMedium,
-            textAlign = TextAlign.Center)
-        Text(text = "Description: ${stringResource(currDimension.description)}",
-            style = MaterialTheme.typography.bodyMedium,
-            textAlign = TextAlign.Center)
-        Text(text = "Implication: ${stringResource(currDimension.implication)}",
-            style = MaterialTheme.typography.bodyMedium,
-            textAlign = TextAlign.Center)
+        DisplayDimensions("Dimensions", stringResource(currDimension.name))
+        DisplayDimensions("Description", stringResource(currDimension.description))
+        DisplayDimensions("Implications", stringResource(currDimension.implication))
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(25.dp))
 
         //now to include the previous and next buttons
         Row (
@@ -191,11 +194,12 @@ fun DisplayMobilityLens(innerPadding: PaddingValues) {
             }
         }
 
-        //for the textbox for the user to enter info
+        Spacer(modifier = Modifier.height(50.dp))
 
+        //for the textbox for the user to enter info
         Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally)
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
             OutlinedTextField(
                 //intial value
@@ -209,11 +213,11 @@ fun DisplayMobilityLens(innerPadding: PaddingValues) {
                         style = MaterialTheme.typography.bodyMedium
                     )
                 },
-                modifier = Modifier.fillMaxWidth().padding(16.dp)
+                modifier = Modifier.weight(1f)
             )
 
             //for space between the ui elements
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.width(16.dp))
 
             val tempDim = stringResource(currDimension.name)
 
@@ -239,4 +243,30 @@ fun DisplayMobilityLens(innerPadding: PaddingValues) {
             modifier = Modifier.fillMaxWidth().padding(16.dp)
         )
     }
+}
+
+@Composable
+fun DisplayDimensions(textDim: String, contentDim: String)
+{
+    Text(
+        text = textDim,
+        style = MaterialTheme.typography.bodySmall,
+        textAlign = TextAlign.Center,
+        modifier = Modifier.fillMaxWidth()
+    )
+
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = Color.Transparent),
+        border = BorderStroke(1.dp, Color.White),
+    ) {
+        Text(
+            text = contentDim,
+            style = MaterialTheme.typography.bodyMedium,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
+        )
+    }
+
+    Spacer(modifier = Modifier.height(15.dp))
 }
