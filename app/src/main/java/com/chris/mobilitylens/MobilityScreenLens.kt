@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -33,6 +34,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+
 
 
     //composable is like a package that allows the function certain functionalities like Text, Button, etc.
@@ -58,7 +63,9 @@ import androidx.compose.ui.unit.dp
                 .fillMaxSize()
                 //padding included so it does not get placed near the edges of the screen
                 .padding(innerPadding)
-                .padding(24.dp),
+                .padding(24.dp)
+                //since the user and display text field was getting cut off because of the dimensions
+                .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.Top
         ){
             Text(text = stringResource(R.string.app_name),
@@ -138,7 +145,7 @@ import androidx.compose.ui.unit.dp
                     label = {
                         Text(
                             text = stringResource(R.string.user_field),
-                            style = MaterialTheme.typography.bodyMedium
+                            style = MaterialTheme.typography.bodySmall
                         )
                     },
                     modifier = Modifier.weight(1f)
