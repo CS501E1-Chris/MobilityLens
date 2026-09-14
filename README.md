@@ -47,6 +47,8 @@ app/
  └── src/
       └── main/
            ├── java/.../MainActivity.kt
+           ├── java/.../Dimensions.kt
+           ├── java/.../MobilityScreenLens.kt
            ├── java/.../ui/theme/
            │    ├── Color.kt
            │    ├── Theme.kt
